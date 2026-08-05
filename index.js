@@ -24,7 +24,7 @@ async function sendNotificationToAdmin(clientName, clientId) {
       to: ADMIN_USER_ID,
       messages: [{
         type: 'text',
-        text: `🚨 【客服通知】\n\n學生/客戶「${clientName}」點選了聯繫導師！\n\n使用者ID: ${clientId}`
+        text: `🚨 【客服通知】\n\n學生/客戶「${clientName}」點選了聯絡導師！\n\n使用者ID: ${clientId}`
       }]
     }, {
       headers: {
@@ -41,8 +41,8 @@ async function sendNotificationToAdmin(clientName, clientId) {
 app.post('/webhook', async (req, res) => {
   const events = req.body.events || [];
   for (const event of events) {
-    // 💡 已經成功改為認得「聯繫導師」囉！
-    if (event.type === 'message' && event.message.text === '聯繫導師') {
+    // 💡 這裡已經成功改為「聯絡導師」囉！
+    if (event.type === 'message' && event.message.text === '聯絡導師') {
       const clientUserId = event.source.userId;
       const clientName = await getUserProfile(clientUserId);
       await sendNotificationToAdmin(clientName, clientUserId);
